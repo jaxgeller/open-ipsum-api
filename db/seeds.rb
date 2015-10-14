@@ -1,4 +1,6 @@
-100.times do
+User.create(email: 'jackson@gmail.com', username: 'jackson', password: 'password')
+
+99.times do
   User.create(
     email: Faker::Internet.free_email,
     username: Faker::Internet.user_name,

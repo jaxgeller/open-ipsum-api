@@ -1,5 +1,6 @@
 class IpsumsController < ApplicationController
   before_action :set_ipsum, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @ipsums = paginate Ipsum.all
