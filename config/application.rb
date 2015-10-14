@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module OpenipsumApi
   class Application < Rails::Application
+    config.api_only = true
     config.active_record.raise_in_transactional_callbacks = true
 
     config.generators do |g|
