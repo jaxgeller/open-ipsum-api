@@ -9,6 +9,7 @@ gem 'friendly_id'
 gem 'will_paginate'
 gem 'api-pagination'
 gem 'libmarkov'
+gem 'devise'
 
 group :development, :test do
   gem 'faker'
