@@ -1,5 +1,5 @@
 class MetaController < ApplicationController
   def index
-    render json: {status: 'okay'}, head: 200
+    render json: {}
   end
 end
