@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete '/users/:id', to: 'users#destroy'
 
   post '/signin', to: 'sessions#create'
-  delte '/signout', to: 'sessions#destroy'
+  delete '/signout', to: 'sessions#destroy'
 
   resources :ipsums, except: [:new, :edit]
 end
