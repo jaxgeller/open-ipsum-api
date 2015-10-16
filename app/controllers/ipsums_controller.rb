@@ -40,7 +40,7 @@ class IpsumsController < ApplicationController
   private
 
     def set_ipsum
-      @ipsum = Ipsum.find(params[:id])
+      @ipsum = Ipsum.friendly.find(params[:id])
     end
 
     def ipsum_params
