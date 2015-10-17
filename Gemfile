@@ -4,6 +4,7 @@ ruby "2.2.2"
 gem 'rails', '4.2.4'
 gem 'rails-api'
 gem 'pg'
+gem 'pg_search'
 gem 'active_model_serializers'
 gem 'libmarkov'
 gem 'friendly_id'
@@ -19,4 +20,3 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring'
 end
-

@@ -1,6 +1,9 @@
 require 'libmarkov'
 
 class Ipsum < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search_by_text, :against => [:title, :text]
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
