@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find_by_username(params[:id])
+    user = @current_user
     if user.update(params.require(:user).permit(:username))
       head :no_content
     else
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find_by_username(params[:id])
+    user = @current_user
     if user.destroy
       head :no_content
     else
