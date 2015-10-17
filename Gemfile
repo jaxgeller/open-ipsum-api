@@ -1,10 +1,8 @@
 source 'https://rubygems.org'
 ruby "2.2.2"
 
-
 gem 'rails', '4.2.4'
 gem 'rails-api'
-gem 'spring', :group => :development
 gem 'pg'
 gem 'active_model_serializers'
 gem 'libmarkov'
@@ -19,5 +17,6 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'spring'
 end
 
