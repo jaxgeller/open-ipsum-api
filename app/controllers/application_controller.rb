@@ -9,8 +9,13 @@ class ApplicationController < ActionController::API
   end
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActionController::ParameterMissing, with: :params_missing
 
   def record_not_found
     render json: {error: "record not found"}
+  end
+
+  def params_missing
+    render json: {error: 'params missing'}
   end
 end
