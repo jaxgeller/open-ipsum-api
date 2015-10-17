@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
   def show
     user = User.find_by_username params[:id]
-    render json: user
+    if user
+      render json: user
+    else
+      record_not_found
+    end
   end
 
   def create
