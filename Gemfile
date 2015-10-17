@@ -12,6 +12,7 @@ gem 'rack-cors'
 gem 'will_paginate'
 gem 'api-pagination'
 gem 'bcrypt', '~> 3.1.7'
+gem 'email_validator'
 gem 'puma'
 
 group :development, :test do
@@ -19,5 +20,4 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'spring'
-  gem 'factory_girl_rails'
 end

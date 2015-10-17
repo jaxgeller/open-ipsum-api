@@ -9,8 +9,20 @@ class Ipsum < ActiveRecord::Base
 
   belongs_to :user
 
+  validates_associated :user
   validates :title, :slug, uniqueness: true
   validates :title, :text, :user, presence: true
+  validates :text, length: {
+    minimum: 2,
+    tokenizer: lambda { |str| str.split(/\.|\?|\!/)},
+    too_short: "must have at least %{count} sentences",
+  }
+  validates :text, length: {
+    minimum: 10,
+    tokenizer: lambda { |str| str.split(/\s+/)},
+    too_short: "must have at least %{count} words",
+  }
+
 
   def generate(count)
     count = 10 if count == 0
