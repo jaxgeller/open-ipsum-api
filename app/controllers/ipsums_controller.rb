@@ -3,7 +3,7 @@ class IpsumsController < ApplicationController
   before_action :authenticate, only: [:create, :update, :destroy]
 
   def index
-    ipsums = Ipsum.all
+    ipsums = paginate Ipsum.all
     render json: ipsums
   end
 
