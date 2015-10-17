@@ -12,7 +12,7 @@ gem 'rack-cors'
 gem 'will_paginate'
 gem 'api-pagination'
 gem 'bcrypt', '~> 3.1.7'
-# gem 'puma'
+gem 'puma'
 
 group :development, :test do
   gem 'faker'
