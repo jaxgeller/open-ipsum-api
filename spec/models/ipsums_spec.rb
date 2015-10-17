@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Ipsum, type: :model do
-  Ipsum.destroy_all
-  User.destroy_all
 
   User.create(username: 'jackson', email: 'jackson@gmail.com', password: 'password')
 
