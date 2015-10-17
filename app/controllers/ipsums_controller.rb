@@ -2,6 +2,11 @@ class IpsumsController < ApplicationController
   before_action :set_ipsum, only: [:generate, :show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
 
+  def search
+    ipsums = paginate Ipsum.search_by_text params[:q]
+    render json: ipsums
+  end
+
   def index
     ipsums = paginate Ipsum.all
     render json: ipsums

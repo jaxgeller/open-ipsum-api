@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   delete '/signout', to: 'sessions#destroy'
 
   resources :ipsums, except: [:new, :edit]
+  get '/search', to: 'ipsums#search'
 end
