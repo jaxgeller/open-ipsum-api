@@ -55,7 +55,6 @@ GEM
       activesupport (>= 4.1.0)
     i18n (0.7.0)
     json (1.8.3)
-    kgio (2.10.0)
     libmarkov (1.0.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -105,7 +104,6 @@ GEM
       activesupport (= 4.2.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.15.0)
     rake (10.4.2)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
@@ -136,10 +134,6 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    unicorn (4.9.0)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     will_paginate (3.0.7)
 
 PLATFORMS
@@ -159,7 +153,6 @@ DEPENDENCIES
   rails-api
   rspec-rails
   spring
-  unicorn
   will_paginate
 
 BUNDLED WITH
