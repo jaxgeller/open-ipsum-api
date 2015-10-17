@@ -11,5 +11,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    user = User.find_by_token request.headers['Authorization'].split('Bearer ')
+    user.generate_token
+
+    if user.save
+      render json: {status: "success"}
+    else
+      render json: {status: "error", errors: "something went wrong"}
+    end
   end
 end

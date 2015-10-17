@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+
   def authenticate
     if request.headers['Authorization']
       user = User.find_by_token request.headers['Authorization'].split('Bearer ')

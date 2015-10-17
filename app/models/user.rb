@@ -8,9 +8,7 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :token, uniqueness: true
 
-  private
-
-    def generate_token
-      self.token = SecureRandom.urlsafe_base64
-    end
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
+  end
 end

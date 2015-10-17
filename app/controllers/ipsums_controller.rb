@@ -15,6 +15,7 @@ class IpsumsController < ApplicationController
 
   def create
     @ipsum = Ipsum.new(ipsum_params)
+    @ipsum.user = User.find_by_token request.headers['Authorization'].split('Bearer ')
 
     if @ipsum.save
       render json: @ipsum, status: :created, location: @ipsum
