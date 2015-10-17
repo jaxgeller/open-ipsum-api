@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'meta#index'
-
 
   get '/users/:id', to: 'users#show'
   post '/users', to: 'users#create'
