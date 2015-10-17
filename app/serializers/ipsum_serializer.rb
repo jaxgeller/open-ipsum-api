@@ -1,3 +1,5 @@
 class IpsumSerializer < ActiveModel::Serializer
-  attributes :id, :title, :text, :preview
+  attributes :title, :text
+  attribute :slug, key: :id
+  belongs_to :user
 end

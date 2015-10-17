@@ -1,5 +1,7 @@
 class IpsumsController < ApplicationController
   before_action :set_ipsum, only: [:show, :update, :destroy]
+  before_action :authenticate, only: [:create, :update, :destroy]
+
 
   def index
     @ipsums = Ipsum.all
@@ -44,6 +46,6 @@ class IpsumsController < ApplicationController
     end
 
     def ipsum_params
-      params.require(:ipsum).permit(:title, :text, :preview)
+      params.require(:ipsum).permit(:title, :text)
     end
 end

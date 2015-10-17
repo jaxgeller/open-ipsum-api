@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
+  before_action :authenticate, only: [:update, :destroy]
+
   def show
+    user = User.find_by_username params[:id]
+    render json: user
   end
 
   def create
@@ -13,6 +17,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    user = User.find_by_username(params[:id])
+    if user.update(params.require(:user).permit(:username))
+      head :no_content
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
