@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    user = User.find_by_token request.headers['Authorization'].split('Bearer ')
+    user = @current_user
     user.generate_token
 
     if user.save

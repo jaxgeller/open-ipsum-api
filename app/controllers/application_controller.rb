@@ -1,11 +1,10 @@
 class ApplicationController < ActionController::API
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
 
   def authenticate
-    if request.headers['Authorization']
-      user = User.find_by_token request.headers['Authorization'].split('Bearer ')
-      render json: {error: "not authorized"} unless user
-    else
-      render json: {error: "not authorized"}
+    authenticate_with_http_basic do |key|
+      @current_user = User.find_by_token key
+      render json: {error: {message: "not authorized"}} unless @current_user
     end
   end
 end
