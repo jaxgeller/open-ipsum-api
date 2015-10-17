@@ -4,6 +4,7 @@ gem 'rails-api'
 gem 'spring', :group => :development
 gem 'pg'
 gem 'active_model_serializers'
+gem 'libmarkov'
 gem 'friendly_id'
 gem 'rack-cors'
 gem 'will_paginate'

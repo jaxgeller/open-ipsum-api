@@ -1,16 +1,19 @@
 class IpsumsController < ApplicationController
-  before_action :set_ipsum, only: [:show, :update, :destroy]
+  before_action :set_ipsum, only: [:generate, :show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
-
 
   def index
     ipsums = Ipsum.all
-
     render json: ipsums
   end
 
   def show
-    render json: ipsum
+    count = params[:count].to_i
+    if count > 10000
+      render json: {error: "cannot generated that many sentences. max 10000"}
+    else
+      render json: @ipsum, meta: {text: @ipsum.generate(count)}, meta_key: "generated"
+    end
   end
 
   def create
@@ -25,9 +28,7 @@ class IpsumsController < ApplicationController
   end
 
   def update
-    ipsum = Ipsum.find(params[:id])
-
-    if ipsum.update(ipsum_params)
+    if @ipsum.update(ipsum_params)
       head :no_content
     else
       render json: ipsum.errors, status: :unprocessable_entity
@@ -35,7 +36,7 @@ class IpsumsController < ApplicationController
   end
 
   def destroy
-    ipsum.destroy
+    @ipsum.destroy
 
     head :no_content
   end
@@ -43,7 +44,7 @@ class IpsumsController < ApplicationController
   private
 
     def set_ipsum
-      ipsum = Ipsum.friendly.find(params[:id])
+      @ipsum = Ipsum.friendly.find(params[:id])
     end
 
     def ipsum_params
