@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
+  get '/*404', to: 'application#route_not_found'
 end
