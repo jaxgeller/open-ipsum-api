@@ -22,8 +22,8 @@ class UsersController < ApplicationController
 
   def update
     user = @current_user
-    if user.update(params.require(:user).permit(:username))
-      head :no_content
+    if user.update(params.require(:user).permit(:password, :password_confirmation))
+      render json: {status: 'updated'}, status: 200
     else
       render json: user.errors, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def destroy
     user = @current_user
     if user.destroy
-      head :no_content
+      render json: {status: 'deleted'}, status: 200
     else
       render json: user.errors, status: :unprocessable_entity
     end

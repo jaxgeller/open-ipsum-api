@@ -1,16 +1,38 @@
-# describe "Ipsums API" do
-#   describe "GET /ipsums" do
-#     it "returns all the ipsums" do
-#       get "/ipsums", {}, { "Accept" => "application/json" }
+describe "Ipsums API" do
 
-#       expect(response.status).to eq 200
+  load "#{Rails.root}/db/seeds.rb"
 
-#       body = JSON.parse(response.body)
-#       puts body
-#       # movie_titles = body.map { |m| m["title"] }
+  it "returns all the ipsums" do
+    get "/ipsums", {}, { "Accept" => "application/json" }
+    expect(response.status).to eq 200
+    body = JSON.parse(response.body)
+    expect(body["ipsums"].length).to eql(6)
+  end
 
-#       # expect(movie_titles).to match_array(["The Lord of the Rings",
-#       #                                      "The Two Towers"])
-#     end
-#   end
-# end
+  it "returns an ipsum" do
+    get "/ipsums/startup-ipsum", {}, { "Accept" => "application/json" }
+    expect(response.status).to eq 200
+    body = JSON.parse(response.body)
+
+    expect(body["ipsum"]["title"]).to eql('Startup Ipsum')
+  end
+
+  it "returns an ipsum" do
+    get "/ipsums/startup-ipsum", {}, { "Accept" => "application/json" }
+    expect(response.status).to eq 200
+    body = JSON.parse(response.body)
+    expect(body["ipsum"]["title"]).to eql('Startup Ipsum')
+    expect(body["generated"]["text"]).to be_a (String)
+  end
+
+  # it "can create an ipsum" do
+  #   get "/ipsums/startup-ipsum", {}, { "Accept" => "application/json" }
+  #   expect(response.status).to eq 200
+  #   body = JSON.parse(response.body)
+  #   expect(body["ipsum"]["title"]).to eql('Startup Ipsum')
+  #   expect(body["generated"]["text"]).to be_a (String)
+  # end
+
+
+
+end

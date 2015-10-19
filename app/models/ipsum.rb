@@ -23,7 +23,6 @@ class Ipsum < ActiveRecord::Base
     too_short: "must have at least %{count} words",
   }
 
-
   def generate(count)
     count = 10 if count == 0
     g = Libmarkov::Generator.new(self.text)
