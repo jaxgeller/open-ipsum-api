@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :ipsums, except: [:new, :edit]
+  get '/search', to: 'ipsums#search'
 
   post '/users', to: 'users#create'
   get '/users/:id', to: 'users#show'
@@ -8,6 +10,4 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
-  resources :ipsums, except: [:new, :edit]
-  get '/search', to: 'ipsums#search'
 end
