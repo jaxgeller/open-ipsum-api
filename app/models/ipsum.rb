@@ -12,20 +12,31 @@ class Ipsum < ActiveRecord::Base
   validates_associated :user
   validates :title, :slug, uniqueness: true
   validates :title, :text, :user, presence: true
+
   validates :text, length: {
     minimum: 2,
     tokenizer: lambda { |str| str.split(/\.|\?|\!/)},
     too_short: "must have at least %{count} sentences",
-  }
+  }, if: :is_markov?
+
   validates :text, length: {
     minimum: 10,
     tokenizer: lambda { |str| str.split(/\s+/)},
     too_short: "must have at least %{count} words",
-  }
+  }, if: :is_markov?
+
+  def is_markov?
+    puts self
+    self.g_markov
+  end
 
   def generate(count)
     count = 10 if count == 0
-    g = Libmarkov::Generator.new(self.text)
+    if self.g_markov
+      g = Libmarkov::Generator.new(self.text)
+    else
+      g = Simplelorem::Generator.new(self.text)
+    end
     g.generate(count)
   end
 end

@@ -129,6 +129,7 @@ GEM
       rspec-mocks (~> 3.3.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    simplelorem (1.0.0)
     slop (3.6.0)
     spring (1.4.0)
     sprockets (3.4.0)
@@ -162,6 +163,7 @@ DEPENDENCIES
   rails (= 4.2.4)
   rails-api
   rspec-rails
+  simplelorem
   spring
   will_paginate
 
