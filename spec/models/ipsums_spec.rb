@@ -35,7 +35,7 @@ RSpec.describe Ipsum, type: :model do
   end
 
   it 'should be able to generate text' do
-    ipsum = Ipsum.new(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, at facilis vero. Libero magni impedit voluptatibus veritatis mollitia fugit, accusantium earum numquam. Corrupti illum, officiis sit omnis tempora, incidunt enim.')
-    expect(ipsum.generate(1)).to be_a (String)
+    ipsum = Ipsum.new(text: Faker::Lorem.paragraphs.join(' '))
+    expect(ipsum.generate(1)).to be_a String
   end
 end

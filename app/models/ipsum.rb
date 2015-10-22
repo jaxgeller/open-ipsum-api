@@ -17,15 +17,15 @@ class Ipsum < ActiveRecord::Base
     minimum: 2,
     tokenizer: ->(str) { str.split(/\.|\?|\!/) },
     too_short: 'must have at least %{count} sentences'
-  }, if: :is_markov?
+  }, if: :markov?
 
   validates :text, length: {
     minimum: 10,
     tokenizer: ->(str) { str.split(/\s+/) },
     too_short: 'must have at least %{count} words'
-  }, if: :is_markov?
+  }, if: :markov?
 
-  def is_markov?
+  def markov?
     g_markov
   end
 
