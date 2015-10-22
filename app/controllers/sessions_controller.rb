@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
-      render json: {status: "success", token: user.token, username: user.username}
+      render json: { status: 'success', token: user.token, username: user.username }
     else
-      render json: {status: "error", errors: "Email or password is wrong"}, status: 422
+      render json: { status: 'error', errors: 'Email or password is wrong' }, status: 422
     end
   end
 
@@ -15,9 +15,9 @@ class SessionsController < ApplicationController
     user.generate_token
 
     if user.save
-      render json: {status: "success"}
+      render json: { status: 'success' }
     else
-      render json: {status: "error", errors: "something went wrong"}
+      render json: { status: 'error', errors: 'something went wrong' }
     end
   end
 end

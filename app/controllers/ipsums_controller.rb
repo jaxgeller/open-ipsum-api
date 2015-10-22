@@ -14,10 +14,10 @@ class IpsumsController < ApplicationController
 
   def show
     count = params[:count].to_i
-    if count > 10000
-      render json: {error: "cannot generated that many sentences. max 10000"}
+    if count > 10_000
+      render json: { error: 'cannot generated that many sentences. max 10000' }
     else
-      render json: @ipsum, meta: {text: @ipsum.generate(count)}, meta_key: "generated"
+      render json: @ipsum, meta: { text: @ipsum.generate(count) }, meta_key: 'generated'
     end
   end
 
@@ -48,11 +48,11 @@ class IpsumsController < ApplicationController
 
   private
 
-    def set_ipsum
-      @ipsum = Ipsum.friendly.find(params[:id])
-    end
+  def set_ipsum
+    @ipsum = Ipsum.friendly.find(params[:id])
+  end
 
-    def ipsum_params
-      params.require(:ipsum).permit(:title, :text, :g_markov)
-    end
+  def ipsum_params
+    params.require(:ipsum).permit(:title, :text, :g_markov)
+  end
 end

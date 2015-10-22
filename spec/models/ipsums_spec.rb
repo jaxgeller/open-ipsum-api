@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Ipsum, type: :model do
-
   User.create(username: 'jackson', email: 'jackson@gmail.com', password: 'password')
 
   it 'should not be valid without title' do
@@ -20,12 +19,12 @@ RSpec.describe Ipsum, type: :model do
   end
 
   it 'should not be valid without 2 sentences of text' do
-    ipsum = Ipsum.new(text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.")
+    ipsum = Ipsum.new(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.')
     expect(ipsum).not_to be_valid
   end
 
   it 'should not be valid without 10 words' do
-    ipsum = Ipsum.new(text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.")
+    ipsum = Ipsum.new(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.')
     expect(ipsum).not_to be_valid
   end
 
@@ -36,7 +35,7 @@ RSpec.describe Ipsum, type: :model do
   end
 
   it 'should be able to generate text' do
-    ipsum = Ipsum.new(text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, at facilis vero. Libero magni impedit voluptatibus veritatis mollitia fugit, accusantium earum numquam. Corrupti illum, officiis sit omnis tempora, incidunt enim.")
+    ipsum = Ipsum.new(text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, at facilis vero. Libero magni impedit voluptatibus veritatis mollitia fugit, accusantium earum numquam. Corrupti illum, officiis sit omnis tempora, incidunt enim.')
     expect(ipsum.generate(1)).to be_a (String)
   end
 end

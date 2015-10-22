@@ -14,16 +14,16 @@ class UsersController < ApplicationController
     strong_params = params.require(:user).permit(:username, :email, :password, :password_confirmation)
     user = User.new(strong_params)
     if user.save
-      render json: {status: "success", token: user.token}
+      render json: { status: 'success', token: user.token }
     else
-      render json: {status: "error", errors: user.errors}
+      render json: { status: 'error', errors: user.errors }
     end
   end
 
   def update
     user = @current_user
     if user.update(params.require(:user).permit(:password, :password_confirmation))
-      render json: {status: 'updated'}, status: 200
+      render json: { status: 'updated' }, status: 200
     else
       render json: user.errors, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def destroy
     user = @current_user
     if user.destroy
-      render json: {status: 'deleted'}, status: 200
+      render json: { status: 'deleted' }, status: 200
     else
       render json: user.errors, status: :unprocessable_entity
     end

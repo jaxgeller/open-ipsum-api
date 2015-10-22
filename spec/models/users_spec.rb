@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it 'should not be valid with an invalid email ' do
     user = User.new(email: '')
     expect(user).not_to be_valid
@@ -29,5 +28,4 @@ RSpec.describe User, type: :model do
     user.generate_token
     expect(user.token).not_to be nil
   end
-
 end
