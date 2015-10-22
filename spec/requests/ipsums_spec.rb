@@ -11,7 +11,7 @@ describe 'Ipsums API' do
     body = JSON.parse(response.body)
 
     expect(response.status).to eq 200
-    expect(body['ipsums'].length).to eql 6
+    expect(body['ipsums'].length).not_to be nil
   end
 
   it 'returns an ipsum' do
