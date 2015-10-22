@@ -23,3 +23,7 @@ group :development, :test do
   gem 'spring'
   gem 'rubocop'
 end
+
+group :production do
+  gem 'rack-attack'
+end
