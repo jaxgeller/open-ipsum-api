@@ -53,6 +53,6 @@ class IpsumsController < ApplicationController
     end
 
     def ipsum_params
-      params.require(:ipsum).permit(:title, :text)
+      params.require(:ipsum).permit(:title, :text, :g_markov)
     end
 end
