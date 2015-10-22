@@ -13,17 +13,17 @@ class Ipsum < ActiveRecord::Base
   validates :title, :slug, uniqueness: true
   validates :title, :text, :user, presence: true
 
-  # validates :text, length: {
-  #   minimum: 2,
-  #   tokenizer: lambda { |str| str.split(/\.|\?|\!/)},
-  #   too_short: "must have at least %{count} sentences",
-  # }, if: :is_markov?
+  validates :text, length: {
+    minimum: 2,
+    tokenizer: lambda { |str| str.split(/\.|\?|\!/)},
+    too_short: "must have at least %{count} sentences",
+  }, if: :is_markov?
 
-  # validates :text, length: {
-  #   minimum: 10,
-  #   tokenizer: lambda { |str| str.split(/\s+/)},
-  #   too_short: "must have at least %{count} words",
-  # }, if: :is_markov?
+  validates :text, length: {
+    minimum: 10,
+    tokenizer: lambda { |str| str.split(/\s+/)},
+    too_short: "must have at least %{count} words",
+  }, if: :is_markov?
 
   def is_markov?
     self.g_markov
