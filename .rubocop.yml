@@ -1,11 +1,11 @@
 AllCops:
   RunRailsCops: true
-  Excludes:
+  Exclude:
     - db/**/*
     - config/**/*
     - bin/**/*
+    - vendor/**/*
 Documentation:
   Enabled: false
 Metrics/LineLength:
   Max: 100
-
