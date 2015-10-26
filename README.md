@@ -4,7 +4,7 @@ clone then run
 
 + `bundle`
 
-+ `postgres -D /usr/local/var/postgres`
++ `docker run --name openipsumdb -e POSTGRES_PASSWORD=openipsum -d postgres`
 
 + `rake db:setup`
 

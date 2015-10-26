@@ -30,7 +30,7 @@ class Ipsum < ActiveRecord::Base
   end
 
   def generate(count)
-    count = 10 if count == 0
+    count = 30 if count == 0
     if g_markov
       g = Libmarkov::Generator.new(text)
     else
