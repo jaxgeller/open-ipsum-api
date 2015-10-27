@@ -1,10 +1,14 @@
 require 'libmarkov'
 
 class Ipsum < ActiveRecord::Base
-  before_save :sanitize
+  before_save :sanitize, :generate_sample
 
   def sanitize
     self.text = self.text.gsub(/\n|\t/, '')
+  end
+
+  def generate_sample
+    self.generated_sample = self.generate(8)
   end
 
   include PgSearch

@@ -21,6 +21,7 @@ describe 'Ipsums API' do
     expect(response.status).to eq 200
     expect(body['ipsum']['title']).to eql 'Startup Ipsum'
     expect(body['generated']['text']).to be_a String
+    expect(body['ipsum']['generated_sample']).to be_a String
   end
 
   it 'can create a markov ipsum' do
