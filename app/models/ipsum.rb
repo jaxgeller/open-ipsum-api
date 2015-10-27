@@ -1,6 +1,12 @@
 require 'libmarkov'
 
 class Ipsum < ActiveRecord::Base
+  before_save :sanitize
+
+  def sanitize
+    self.text = self.text.gsub(/\n|\t/, '')
+  end
+
   include PgSearch
   pg_search_scope :search_by_text, against: [:title, :text]
 
