@@ -12,7 +12,7 @@ class Ipsum < ActiveRecord::Base
   end
 
   include PgSearch
-  pg_search_scope :search_by_text, against: [:title, :text]
+  pg_search_scope :search_by_text, against: [:title, :text], :using => {:tsearch => {:prefix => true} }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
