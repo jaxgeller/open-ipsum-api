@@ -13,7 +13,6 @@ describe 'Sessions API' do
     body = JSON.parse(response.body)
 
     expect(response.status).to eq 200
-    expect(body['status']).to eql 'success'
     expect(body['token']).to be_a String
     expect(body['username']).to eql user.username
   end
@@ -26,7 +25,6 @@ describe 'Sessions API' do
     body = JSON.parse(response.body)
 
     expect(response.status).to eq 200
-    expect(body['status']).to eql 'success'
     expect(Base64.encode64("#{User.last.token}:")).not_to eql user.token
   end
 end
