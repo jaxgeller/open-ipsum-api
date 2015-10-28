@@ -8,7 +8,7 @@ class Ipsum < ActiveRecord::Base
   end
 
   def generate_sample
-    self.generated_sample = self.generate(8)
+    self.generated_sample = self.generate(5)
   end
 
   include PgSearch
