@@ -23,6 +23,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'spring'
+  gem 'brakeman', :require => false
+  gem 'bullet', :require => false
 end
 
 group :production do
