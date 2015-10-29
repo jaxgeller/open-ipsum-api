@@ -16,8 +16,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'email_validator'
 gem 'puma'
 
+gem 'rubocop'
+gem 'faker'
+
 group :development, :test do
-  gem 'faker'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'spring'
