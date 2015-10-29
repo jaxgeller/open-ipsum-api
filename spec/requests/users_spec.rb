@@ -23,8 +23,8 @@ describe 'Users API' do
     body = JSON.parse(response.body)
 
     expect(response.status).to eq 200
-    expect(body['status']).to eql 'success'
     expect(body['token']).to be_a String
+    expect(body['username']).to be_a String
   end
 
   it 'should be able to delete a user' do
