@@ -21,7 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'spring'
-  # gem 'rubocop'
+  gem 'rubocop'
 end
 
 group :production do

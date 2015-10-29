@@ -4,15 +4,15 @@ class Ipsum < ActiveRecord::Base
   before_save :sanitize, :generate_sample
 
   def sanitize
-    self.text = self.text.gsub(/\n|\t/, '')
+    self.text = text.gsub(/\n|\t/, '')
   end
 
   def generate_sample
-    self.generated_sample = self.generate(5)
+    self.generated_sample = generate(5)
   end
 
   include PgSearch
-  pg_search_scope :search_by_text, against: [:title, :text], :using => {:tsearch => {:prefix => true} }
+  pg_search_scope :search_by_text, against: [:title, :text], using: { tsearch: { prefix: true } }
 
   extend FriendlyId
   friendly_id :title, use: :slugged
