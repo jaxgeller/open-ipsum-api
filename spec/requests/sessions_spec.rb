@@ -22,7 +22,7 @@ describe 'Sessions API' do
 
     params = { user: { email: user.email, password: 'password' } }
     delete '/signout', params, auth_headers(user)
-    body = JSON.parse(response.body)
+    JSON.parse(response.body)
 
     expect(response.status).to eq 200
     expect(Base64.encode64("#{User.last.token}:")).not_to eql user.token
