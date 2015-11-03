@@ -15,7 +15,7 @@ class IpsumsController < ApplicationController
   def show
     count = params[:count].to_i
     if count > 10_000
-      render json: { error: 'cannot generated that many sentences. max 10000' }
+      render json: { errors: ['cannot generated that many sentences. max 10000'] }
     else
       render json: @ipsum, meta: { text: @ipsum.generate(count) }, meta_key: 'generated'
     end
@@ -28,7 +28,7 @@ class IpsumsController < ApplicationController
     if ipsum.save
       render json: ipsum, status: :created, location: ipsum
     else
-      render json: ipsum.errors, status: :unprocessable_entity
+      render json: {errors: ipsum.errors}, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,7 @@ class IpsumsController < ApplicationController
     if @ipsum.update(ipsum_params)
       head :no_content
     else
-      render json: ipsum.errors, status: :unprocessable_entity
+      render json: {errors: ipsum.errors}, status: :unprocessable_entity
     end
   end
 
