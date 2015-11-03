@@ -28,7 +28,7 @@ class IpsumsController < ApplicationController
     if ipsum.save
       render json: ipsum, status: :created, location: ipsum
     else
-      render json: {errors: ipsum.errors}, status: :unprocessable_entity
+      render json: { errors: ipsum.errors }, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,7 @@ class IpsumsController < ApplicationController
     if @ipsum.update(ipsum_params)
       head :no_content
     else
-      render json: {errors: ipsum.errors}, status: :unprocessable_entity
+      render json: { errors: ipsum.errors }, status: :unprocessable_entity
     end
   end
 
