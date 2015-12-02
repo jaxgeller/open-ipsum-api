@@ -15,6 +15,7 @@ describe 'Sessions API' do
     expect(response.status).to eq 200
     expect(body['token']).to be_a String
     expect(body['username']).to eql user.username
+    expect(body['email']).to eql user.email
   end
 
   it 'deletes a session' do

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:user][:email])
     if user && user.authenticate(params[:user][:password])
-      render json: { token: user.token, username: user.username }
+      render json: { token: user.token, username: user.username, email: user.email }
     else
       render json: { status: 'error', errors: 'Email or password is wrong' }, status: 422
     end
