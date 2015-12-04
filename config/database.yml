@@ -80,6 +80,9 @@ test:
 #
 production:
   <<: *default
-  database: openipsum-api-v2_production
-  username: openipsum-api-v2
-  password: <%= ENV['OPENIPSUM-API-V2_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: utf8
+  host: <%= ENV['OPENIPSUM-API_HOST'] %>
+  database: <%= ENV['OPENIPSUM-API_DATABASE'] %>
+  username: <%= ENV['OPENIPSUM-API_DATABASE_USERNAME'] %>
+  password: <%= ENV['OPENIPSUM-API_DATABASE_PASSWORD'] %>
