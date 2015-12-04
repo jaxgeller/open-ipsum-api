@@ -1,22 +1,20 @@
 cache: bundler
+
 language: ruby
+
 rvm:
-- 2.2.2
+  - 2.2.2
+
 addons:
   postgresql: '9.4'
+
 before_script:
-- cp config/database.yml.travis config/database.yml
-- psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 notifications:
   email: false
+
 script:
-- bundle exec rake rubocop
-- bundle exec rake spec
-deploy:
-  provider: heroku
-  api_key:
-    secure: eeUwzq70fn+/7LxPuyzPDQ443ameaP8R6OCD+e6n4WFkDYknUseVBWBUFaARe/9U9uNVk3pTIl3nXWLSxJ7B1u3bIJn0QRRkWZCE1xFqE2uRtYsbFWhlP4ZjXoLQYcln6Lh1gRcPj1Xf2JPqm+4cOiAqS1fqGSYZx/DfMiESWK2NNVRQh9sIuyY56Pyqh0uOuRA+A+/xmAlFyuSpKtBNc9cpVZnySDfuHwd5knRrfXs9XbOBzdgBUXLZVGokYa9wc+imYaahrtQBtHmViXLRuJhUNhBXXeQoSphnyRscC+FCg+gOgVuSKqtInuP4aKCfz+7KONQIm5Oufdllwyy/ISmbq1scY06iMFKFJMPSyToUCseBqLtdorx87PtKEigf/LN6BAV0KS/k7j54CfKfKwDM/eio72Cj4W1lhD6VHB/qQE3D6ru+8ZhEe91aluAi0gflkl1Cf+HIhjkLbLn2o6RAEGpEAsxVTJofrpcndseOl56WEaiZJ+P0wilXmJm/4t/53zEOAPY6tTmRuah1IJZBKEYjpZhsEPQlW5iSv1a8m7OsB/04OwQQ7Xp7mEEcZD9rbiUHweH6W5leBiq8w27b0A1OfjTdN5Dm278DsXR+T9x7KMm6WVDZm6Y6tX3BZphtxhGQLpEsCdNe7g4idMSiuDXrkwQJdz8/hDbzmkI=
-  app: aqueous-lowlands-4335
-  on:
-    repo: jaxgeller/open-ipsum-api
-  run: "rake db:reset"
+  - bundle exec rake rubocop
+  - bundle exec rake spec
