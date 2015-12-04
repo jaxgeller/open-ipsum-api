@@ -33,10 +33,14 @@ class Ipsum < ActiveRecord::Base
     minimum: 10,
     tokenizer: ->(str) { str.split(/\s+/) },
     too_short: 'must have at least %{count} words'
-  }, if: :markov?
+  }, if: :reg?
 
   def markov?
     g_markov
+  end
+
+  def reg?
+    !g_markov
   end
 
   def generate(count)

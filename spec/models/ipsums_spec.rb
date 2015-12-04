@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Ipsum, type: :model do
-  User.create(username: 'jackson', email: 'jackson@gmail.com', password: 'password')
+  p = 'password'
+  User.create(username: 'jackson', email: 'jackson@gmail.com', password: p, password_confirmation: p)
 
   it 'should not be valid without title' do
     ipsum = Ipsum.new(title: nil)

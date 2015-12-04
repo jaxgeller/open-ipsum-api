@@ -21,10 +21,27 @@ class UsersController < ApplicationController
 
   def update
     user = @current_user
-    if user.update(params.require(:user).permit(:password, :password_confirmation))
-      render json: { status: 'updated' }, status: 200
+    p = params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
+
+    if p[:current_password]
+      if user.authenticate p[:current_password]
+        p.delete(:current_password)
+        if user.update(p)
+          render json: { status: 'updated' }, status: 200
+        else
+          render json: {errors: user.errors}, status: :unprocessable_entity
+        end
+      else
+        render json: {errors: ['Incorrect Password']}, status: 401
+      end
     else
-      render json: user.errors, status: :unprocessable_entity
+      p.delete(:password)
+      p.delete(:password_confirmation)
+      if user.update(p)
+        render json: { status: 'updated' }, status: 200
+      else
+        render json: {errors: user.errors}, status: :unprocessable_entity
+      end
     end
   end
 

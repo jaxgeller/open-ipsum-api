@@ -11,6 +11,11 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
+  it 'should be not valid because of a short password' do
+    user = User.create(email: 'jackson@gmail.com', username: 'jackson', password: 'p')
+    expect(user).not_to be_valid
+  end
+
   it 'should be able to create a user' do
     User.create(email: 'jackson@gmail.com', username: 'jackson', password: 'password')
     expect(User.find_by_username('jackson')).not_to be nil

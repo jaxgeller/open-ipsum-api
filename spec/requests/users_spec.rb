@@ -35,6 +35,17 @@ describe 'Users API' do
     expect(User.find_by_username(user.username)).to eql nil
   end
 
+  it 'should be able to update a user' do
+    user = User.last
+    params = { username: 'newusername', email: 'newemail@gmail.com' }
+    put "/users/#{user.username}", { user: params }, auth_headers(user)
+
+    body = JSON.parse(response.body)
+
+    expect(response.status).to eq 200
+    expect(body['status']).to eql 'updated'
+  end
+
   it 'should be able to update password' do
     user = User.last
     password = '123456password'
