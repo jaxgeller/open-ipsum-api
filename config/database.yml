@@ -15,5 +15,6 @@ test:
 production:
   <<: *default
   database: openipsum
+  host: localhost
   username: <%= ENV['OPENIPSUM_DATABASE_USERNAME'] %>
   password: <%= ENV['OPENIPSUM_DATABASE_PASSWORD'] %>
