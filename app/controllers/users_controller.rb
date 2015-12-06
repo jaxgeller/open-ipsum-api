@@ -32,7 +32,7 @@ class UsersController < ApplicationController
           render json: {errors: user.errors}, status: :unprocessable_entity
         end
       else
-        render json: {errors: ['Incorrect Password']}, status: 401
+        render json: {errors: {password: ['Incorrect Password']}}, status: 401
       end
     else
       p.delete(:password)
