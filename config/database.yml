@@ -14,6 +14,6 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['OPENIPSUM-API_DATABASE'] %>
-  username: <%= ENV['OPENIPSUM-API_DATABASE_USERNAME'] %>
-  password: <%= ENV['OPENIPSUM-API_DATABASE_PASSWORD'] %>
+  database: <%= ENV['OPENIPSUM_API_DATABASE'] %>
+  username: <%= ENV['OPENIPSUM_API_DATABASE_USERNAME'] %>
+  password: <%= ENV['OPENIPSUM_API_DATABASE_PASSWORD'] %>
