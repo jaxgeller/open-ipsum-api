@@ -9,7 +9,7 @@ development:
 
 test:
   <<: *default
-  database: openipsum-api-v2_test
+  database: "openipsumapitest"
   username: postgres
 
 production:
