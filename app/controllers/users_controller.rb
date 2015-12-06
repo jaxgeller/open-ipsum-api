@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # rubocop:disable all
   def update
     user = @current_user
     p = params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
@@ -29,10 +30,10 @@ class UsersController < ApplicationController
         if user.update(p)
           render json: { status: 'updated' }, status: 200
         else
-          render json: {errors: user.errors}, status: :unprocessable_entity
+          render json: { errors: user.errors }, status: :unprocessable_entity
         end
       else
-        render json: {errors: {password: ['Incorrect Password']}}, status: 401
+        render json: { errors: { password: ['Incorrect Password'] } }, status: 401
       end
     else
       p.delete(:password)
@@ -40,10 +41,11 @@ class UsersController < ApplicationController
       if user.update(p)
         render json: { status: 'updated' }, status: 200
       else
-        render json: {errors: user.errors}, status: :unprocessable_entity
+        render json: { errors: user.errors }, status: :unprocessable_entity
       end
     end
   end
+  # rubocop:enable all
 
   def destroy
     user = @current_user
