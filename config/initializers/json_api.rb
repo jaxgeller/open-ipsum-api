@@ -1,3 +1,1 @@
-ActiveModel::Serializer.setup do |config|
-  config.adapter = :json
-end
+ActiveModel::Serializer.config.adapter = :json
