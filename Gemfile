@@ -13,7 +13,6 @@ gem 'will_paginate'
 gem 'api-pagination'
 gem 'bcrypt', '~> 3.1.7'
 gem 'email_validator'
-gem 'puma'
 
 gem 'rubocop'
 gem 'faker'
