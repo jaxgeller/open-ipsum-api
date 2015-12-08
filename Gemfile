@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 gem 'rails-api'
 gem 'pg'
 gem 'pg_search'
@@ -13,7 +13,6 @@ gem 'will_paginate'
 gem 'api-pagination'
 gem 'bcrypt', '~> 3.1.7'
 gem 'email_validator'
-
 gem 'rubocop'
 gem 'faker'
 
