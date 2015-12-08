@@ -15,9 +15,4 @@ Ipsum.create(title: 'Bluth Ipsum', text: bluth_ipsum, user: User.last)
 pulp_ipsum = File.open("db/ipsum_data/pulp_ipsum.txt", "r").read
 Ipsum.create(title: 'Pulp Ipsum', text: pulp_ipsum, user: User.all.sample)
 
-
-
-
-
-
 Ipsum.create(title: 'Lorem Ipsum', text: Faker::Lorem.paragraphs.join(' '), user: User.all.sample)
