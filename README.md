@@ -1,17 +1,5 @@
 [![Build Status](https://travis-ci.org/jaxgeller/open-ipsum-api.svg?branch=master)](https://travis-ci.org/jaxgeller/open-ipsum-api)
 
-clone then run
-
-+ `bundle`
-
-+ `docker run --name openipsumdb -e POSTGRES_PASSWORD=openipsum -d postgres`
-
-+ `rake db:setup`
-
-+ `rails s`
-
-+ `curl localhost:3000/ipsums`
-
 ### API
 
 ```

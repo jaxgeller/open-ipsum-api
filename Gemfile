@@ -27,5 +27,5 @@ end
 
 group :production do
   gem 'rack-attack'
-  gem 'passenger'
+  gem 'puma'
 end
