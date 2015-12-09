@@ -17,3 +17,6 @@ notifications:
 script:
   - bundle exec rake rubocop
   - bundle exec rake spec
+
+after_success:
+  - eval "$(ssh-agent -s)"
