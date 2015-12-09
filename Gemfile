@@ -17,6 +17,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'email_validator'
 gem 'rubocop'
 gem 'faker'
+gem 'mandrill-api'
 
 group :development, :test do
   gem 'pry-rails'
