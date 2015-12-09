@@ -6,9 +6,8 @@ app_dir = File.expand_path("../..", __FILE__)
 workers 2
 threads 1, 6
 
-port 3000
-
-bind "unix://var/tmp/puma/socket/puma.sock"
+bind 'unix:/tmp/puma.sock'
+pidfile '/tmp/puma.pid'
 
 on_worker_boot do
   require "active_record"

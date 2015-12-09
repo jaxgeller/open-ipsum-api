@@ -30,4 +30,5 @@ end
 group :production do
   gem 'rack-attack'
   gem 'puma'
+  gem 'rack-timeout'
 end
