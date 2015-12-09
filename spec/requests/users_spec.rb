@@ -6,14 +6,14 @@ def auth_headers(user)
 end
 
 def user_params
-  { username: 'jaxdoge', email: 'j@j.com', password: 'password', password_confirmation: 'password' }
+  { username: 'robert', email: 'j@j.com', password: 'password', password_confirmation: 'password' }
 end
 
 describe 'Users API' do
   it 'returns a specific user' do
+    User.create(user_params)
     get '/users/robert', {}, Accept: 'application/json'
     body = JSON.parse(response.body)
-
     expect(response.status).to eq 200
     expect(body['user']['username']).to eql 'robert'
   end

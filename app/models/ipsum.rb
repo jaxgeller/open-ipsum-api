@@ -1,47 +1,15 @@
 require 'libmarkov'
 
 class Ipsum < ActiveRecord::Base
-  before_save :sanitize, :generate_sample
-
-  def sanitize
-    self.text = text.gsub(/\n|\t/, '')
-  end
-
-  def generate_sample
-    self.generated_sample = generate(5)
-  end
-
-  include PgSearch
-  pg_search_scope :search_by_text, against: [:title, :text], using: { tsearch: { prefix: true } }
-
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  include PgSearch
 
+  before_save :sanitize, :generate_sample
   belongs_to :user
 
-  validates_associated :user
-  validates :title, :slug, uniqueness: true
-  validates :title, :text, :user, presence: true
+  pg_search_scope :search_by_text, against: [:title, :text], using: { tsearch: { prefix: true } }
 
-  validates :text, length: {
-    minimum: 2,
-    tokenizer: ->(str) { str.split(/\.|\?|\!/) },
-    too_short: 'must have at least %{count} sentences'
-  }, if: :markov?
-
-  validates :text, length: {
-    minimum: 10,
-    tokenizer: ->(str) { str.split(/\s+/) },
-    too_short: 'must have at least %{count} words'
-  }, if: :reg?
-
-  def markov?
-    g_markov
-  end
-
-  def reg?
-    !g_markov
-  end
+  friendly_id :title, use: :slugged
 
   def generate(count)
     count = 30 if count == 0
@@ -52,4 +20,38 @@ class Ipsum < ActiveRecord::Base
     end
     g.generate(count)
   end
+
+  def sanitize
+    self.text = text.gsub(/\n|\t/, '')
+  end
+
+  def generate_sample
+    self.generated_sample = generate(5)
+  end
+
+  validates_associated :user
+  validates :title, :slug, uniqueness: true
+  validates :title, :text, :user, presence: true
+
+  validates :text, length: {minimum: 125, maximum: 7500}, allow_blank: false
+  validates :text, length: {
+    minimum: 10,
+    tokenizer: ->(str) { str.split(/\.|\?|\!/) },
+    too_short: 'must have at least %{count} sentences'
+  }, if: :markov?
+
+  validates :text, length: {
+    minimum: 20,
+    tokenizer: ->(str) { str.split(',') },
+    too_short: 'must have at least %{count} comma separated values'
+  }, if: :reg?
+
+  private
+    def markov?
+      g_markov
+    end
+
+    def reg?
+      !g_markov
+    end
 end

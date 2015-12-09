@@ -27,7 +27,7 @@ describe 'Ipsums API' do
   it 'can create a markov ipsum' do
     user = User.first
     title = Faker::Company.buzzword
-    text = Faker::Lorem.paragraphs.join ' '
+    text = Faker::Lorem.paragraphs(20).join(' ')
     post '/ipsums', { ipsum: { title: title, text: text } }, auth_headers(user)
     body = JSON.parse(response.body)
 
@@ -36,10 +36,10 @@ describe 'Ipsums API' do
     expect(body['ipsum']['user']['username']).to eql user.username
   end
 
-  it 'can create a lorem ipsum' do
+  it 'can create a regular ipsum' do
     user = User.last
     title = Faker::Company.buzzword
-    text = Faker::Lorem.paragraphs.join ' '
+    text = Faker::Lorem.words(20).join(', ')
     post '/ipsums', { ipsum: { title: title, text: text, g_markov: 'false' } }, auth_headers(user)
     body = JSON.parse(response.body)
 
