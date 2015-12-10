@@ -37,6 +37,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | b
 source "$HOME/.bashrc"
 source "$HOME/.nvm/nvm.sh"
 nvm install v4.2.2
+nvm alias default v4.2.2
 npm install ember-cli bower -g
 
 # Init HOME Directory
