@@ -3,7 +3,7 @@ language: ruby
 rvm:
 - 2.2.3
 addons:
-  postgresql: '9.4'
+  ssh_known_hosts: openipsum.com
 before_script:
 - psql -c "create database openipsumapitest;" -U postgres
 notifications:
@@ -22,7 +22,4 @@ before_install:
   -in deployment/deploy_key.pem.enc -out deployment/deploy_key.pem -d
 env:
   global:
-    secure: F8sC9vSfBtOU7HWba79F6jzVrw5FMvYJsS4pPEUZOuBYhi3rp73z1vHPI7cvavIPFHYfa/fwjWDukfxEJHtA46X1b/haCqr0QgM+XkaLQavu6L5M35u9/nduaoIMAgmd0B296HytVUSoQQF0Ds3T0YLJAIT3yhZYvvoDyFbxpi6ezOkVfPnVYO6WmeHaYZZCK19Ey3/ab3cmfZlhm3Y6lKYtEzRC2psuO2A3ZtPsJCQ+NToO61CXv+DnV9QxjqtnQ7siva906m+PR7uvTT4dXS8LYZtyCJ/1PUQ5MPkxAjarBoW+DLaCkAdW18fPfcsawUPD7Nfh0Qf+t4rXwvfJZAEoaUfprJizbc2KtjorXbihkT0qSOIWqot83m0ngJgFvHyfu2q2HgVPvru7vQvTqemLeXYb3SmlhECTXYmDI8ffqhMDCFuJD97etjRARzrgEu1v9+UleFww5VYLFaGrLOqdw8gHiLeutH/VP9NuWIGMPotPs7G15La0A1rWdyrrPhFrYMG2YqGP5jyqEwAS+cTc03rkHw0lX2pNJ5HuJpiPY+qUkr8TtASI/VyZe1kNWVjT/HSatr9f/tQiku1Lb1+FtkFy/C5NK9ol+9qyiSQdgYx1NVKNEXjFJWsGXElXC6AIk5GHDYmzqv6zNrKkHUD5+TZmhIMc5b40kslwbPk=
-
-# addons:
-#   ssh_known_hosts: openipsum.com
+    secure: uMUGQCOAhFyHEh6As2E+24k6/DwrOpf9uHVL/IdDF+seozf2/qngSD1rCKRizXtWgy6hpxZR2OcMFDRX4DFdjAG2mESY1HVnj5BtSslQhPfHFDjyvA+qjbJb71+Kkk604MceQhugIuoOi8uW79PUElLC3mKv75AE8Kwu2FlZWOU2zKQ/XdlG8zS9gmYuxQnLtH/yadjUAlH1uIOAwKiSA38GhsvlQi7ZfCUy4qLZqoJv1UfVcanpGFoFH12ql8mJXezR5ctwLXIC7p0Pnr7JXo9mnL4Jfawtvzr5yS6WLYKJRwBEkE2oyBvKX3VUmNmWFcxaTu3Cyowy1RkEXHtANerW+uAHTcNwCfnqxEXRkCTRN2NJDf+yTipiIfKwU1qIRnVjTDTN790HqValgoopeXFrF/drRtbL7htl/MJ1Ah+7OaVClJOmT0hpo/apUH/f3G2xa7Teri0IfHP5ROvedQEMxO1GO1aTEOI8mqxau4/IPjbwS4Qo0ZIYQcxG8vi5N2r945mavBiWWppD89phaKyl7f5THHhRcAdgInq8GKZFicyeA0Kv//GNDDcyoCHkRtEbbqAh0NhTco6R9fXz7P50QQfrfx+tvS3tgZSmRSCvShra0xp8IUIGazl+jJAbgeYlvgXzOPbM0Y1hFGo5XLLfzG4tQclGluZ2GctZqz4=
