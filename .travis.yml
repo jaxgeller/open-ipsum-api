@@ -15,11 +15,8 @@ after_success:
 - eval "$(ssh-agent -s)"
 - chmod 600 deployment/deploy_key.pem
 - ssh-add deployment/deploy_key.pem
-- git remote add deploy $DEPLOY_URL
-- git push deploy master
+- git remote add deploy "ssh://ubuntu@api.openipsum.com/home/ubuntu/git-deploys/api.git"
+- git push -u deploy master
 before_install:
 - openssl aes-256-cbc -K $encrypted_9ad051952287_key -iv $encrypted_9ad051952287_iv
   -in deployment/deploy_key.pem.enc -out deployment/deploy_key.pem -d
-env:
-  global:
-    secure: YiEzMJ49wTMqFVJDGbAPNrQcjr2sJ/TJy3Z+cHyzBbz3I8t9+BZ2mauaWiaOKiH+EtgojSBwihu4C6g7S/1ehz96cJ4pN56vALdi7P6+Uw/fcdhFpNjpFjiKTcBtWACJeGqM0O9O+9MNhKNTGOCbbeRlmJkCs29yPOI0oC446PqkcH7f+GNiSW9LaBDEgLvYC20W44jjNnC3JLjYtf26lypJm6DSAB6UnAW0H7SMbdLFL9eoiyWC5jS7oSnsv9cz5K3sG8xTLT86GGlvk2Okbk+hgV/+XKq0WWSO4518QhHdZPAkJ+aYzoqwDVyYBx+pABDBm3ynHSmPV2ZBOPcOJ/w60Mt9eFA1NMSk/6fJsEggYe4EDeBJuQzY04DVWJJk9a/rQquVDOKppuJYdm3cPCaj7MFGYr6rPu0wABy8uZGyLubVVC8ap08jTE4nh0dlps5WQKgjWV4IxbC41M4R9VwiMfYrNpXZUY4OIYlnN33c/jfIZlYrAB9IFjIjY9wDykdbMMrsIDnf0leHKy5HndW8STeCGgWOXp2WwqFnEAvmOHnTGGZC49vMhV54ApPwneA/w8Lpq1XwphYSMGq0X+h+SHloWTsZnaDjFn4nWbCy9qkvBHCXLAAqOR/Gv96NK5SS9qwv184cStFFpZXT1HwCizfS9X/8yvQZ/VE3guI=
