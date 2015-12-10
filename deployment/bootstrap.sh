@@ -65,8 +65,8 @@ echo "
 #!/bin/bash
 WORK_TREE=/home/ubuntu/api
 GIT_TREE=/home/ubuntu/git-deploys/api.git
-git --work-tree=$WORK_TREE --git-dir=$GIT_TREE checkout -f
-cd $WORK_TREE
+git --work-tree=\$WORK_TREE --git-dir=\$GIT_TREE checkout -f
+cd \$WORK_TREE
 /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle install
 RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:migrate
 kill -9 \$(cat /tmp/puma.pid)
@@ -79,8 +79,8 @@ echo "
 #!/bin/bash
 WORK_TREE=/home/ubuntu/ui
 GIT_TREE=/home/ubuntu/git-deploys/ui.git
-git --work-tree=$WORK_TREE --git-dir=$GIT_TREE checkout -f
-cd $WORK_TREE
+git --work-tree=\$WORK_TREE --git-dir=\$GIT_TREE checkout -f
+cd \$WORK_TREE
 /home/ubuntu/.nvm/versions/node/v4.2.2/bin/npm install
 /home/ubuntu/.nvm/versions/node/v4.2.2/bin/bower install
 /home/ubuntu/.nvm/versions/node/v4.2.2/bin/ember build -prod
