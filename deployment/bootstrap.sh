@@ -43,7 +43,7 @@ nvm alias default v4.2.2
 npm install ember-cli bower -g
 
 # Init HOME Directory
-mkdir -p /home/ubuntu/{api,certs,git-deploys/{api.git,ui.git},ui,logs}
+mkdir -p /home/ubuntu/{api,certs,git-deploys/{api.git,ui.git},ui,logs/{nginx,ui,git-deploys}}
 
 # Install and init API source, set keybase
 cd "$HOME/api"
@@ -139,7 +139,7 @@ server {
   location / {
     try_files \$uri \$uri/ /index.html?/\$request_uri;
   }
-  ssl_certificate   /home/ubuntu/certs/openipsum_com.chained.crt;
+  ssl_certificate       /home/ubuntu/certs/openipsum_com.chained.crt;
   ssl_certificate_key   /home/ubuntu/certs/openipsum.com.key;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_prefer_server_ciphers on;
@@ -147,10 +147,43 @@ server {
 }
 " > /etc/nginx/sites-enabled/ui.conf'
 
-sudo sed -i 's/# gzip_vary on;/gzip_vary on;/g' /etc/nginx/nginx.conf
-sudo sed -i 's/# gzip_proxied any;/gzip_proxied any;/g' /etc/nginx/nginx.conf
-sudo sed -i 's/# gzip_types /gzip_types /g' /etc/nginx/nginx.conf
+sudo bash -c 'echo "
+user www-data;
+worker_processes 4;
+pid /run/nginx.pid;
 
-# Add server startup script
+events {
+  worker_connections 1024;
+  multi_accept on;
+}
+
+http {
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
+  client_body_timeout 30;
+  client_header_timeout 30;
+  send_timeout 30;
+  keepalive_timeout 60;
+  client_max_body_size 128M;
+  types_hash_max_size 2048;
+
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+
+  access_log  off;
+  error_log /home/ubuntu/logs/nginx/error.log;
+
+  gzip on;
+  gzip_disable "msie6";
+  gzip_static on;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-enabled/*;
+}
+" > /etc/nginx/nginx.conf'
 
 echo "remember to add SSL certs! And to restart!"
