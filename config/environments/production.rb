@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.middleware.use Rack::Attack
 
   # Mandrill
   # config.action_mailer.smtp_settings = {

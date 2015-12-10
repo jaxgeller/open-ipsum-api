@@ -2,22 +2,22 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
-gem 'rails', '4.2.5'
-gem 'rails-api'
-gem 'pg'
-gem 'pg_search'
 gem 'active_model_serializers', '0.10.0.rc3'
-gem 'libmarkov'
-gem 'simplelorem', '1.0.7'
-gem 'friendly_id'
-gem 'rack-cors'
-gem 'will_paginate'
 gem 'api-pagination'
 gem 'bcrypt', '~> 3.1.7'
 gem 'email_validator'
-gem 'rubocop'
 gem 'faker'
+gem 'friendly_id'
+gem 'libmarkov'
 gem 'mandrill-api'
+gem 'pg'
+gem 'pg_search'
+gem 'rack-cors'
+gem 'rails', '4.2.5'
+gem 'rails-api'
+gem 'rubocop'
+gem 'simplelorem', '1.0.7'
+gem 'will_paginate'
 
 group :development, :test do
   gem 'pry-rails'
@@ -28,7 +28,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'rack-attack'
   gem 'puma'
+  gem 'rack-attack'
   gem 'rack-timeout'
 end
