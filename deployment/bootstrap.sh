@@ -105,7 +105,7 @@ upstream api {
 server {
   listen 80;
   server_name api.openipsum.com;
-  rewrite ^/(.*) https://api.openipsum.com/$1 permanent;
+  rewrite ^/(.*) https://api.openipsum.com/\$1 permanent;
 }
 server {
   listen 443 ssl;
@@ -125,7 +125,7 @@ sudo bash -c 'echo "
 server {
   listen 80;
   server_name openipsum.com;
-  rewrite ^/(.*) https://openipsum.com/$1 permanent;
+  rewrite ^/(.*) https://openipsum.com/\$1 permanent;
 }
 server {
   listen 443 ssl;
@@ -133,7 +133,7 @@ server {
   root /home/ubuntu/ui/dist;
   index index.html index.htm;
   location / {
-    try_files $uri $uri/ /index.html?/$request_uri;
+    try_files \$uri \$uri/ /index.html?/\$request_uri;
   }
   ssl_certificate   /home/ubuntu/certs/openipsum_com.chained.crt;
   ssl_certificate_key   /home/ubuntu/certs/openipsum.com.key;
