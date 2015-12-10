@@ -35,11 +35,12 @@ gem install bundler
 # Install Node 4.2.2
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
 source "$HOME/.bashrc"
+source "$HOME/.nvm/nvm.sh"
 nvm install v4.2.2
 npm install ember-cli bower -g
 
 # Init HOME Directory
-mkdir -p /home/ubuntu/{api,certs,git-deploys,ui,logs}
+mkdir -p /home/ubuntu/{api,certs,git-deploys/{api.git,ui.git},ui,logs}
 
 # Install and init API source, set keybase
 cd "$HOME/api"
@@ -48,8 +49,8 @@ bundle install
 SECRET_KEY_BASE=$(rake secret)
 echo "export SECRET_KEY_BASE=$SECRET_KEY_BASE" >> "$HOME/.bashrc"
 source "$HOME/.bashrc"
-rake db:create
-rake db:reset
+RAILS_ENV=production rake db:create
+RAILS_ENV=production rake db:reset
 bundle exec puma --daemon
 
 # Install and init UI Source
@@ -67,9 +68,9 @@ GIT_TREE=/home/ubuntu/git-deploys/api.git
 git --work-tree=$WORK_TREE --git-dir=$GIT_TREE checkout -f
 cd $WORK_TREE
 /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle install
-/home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:migrate
+RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:migrate
 kill -9 \$(cat /tmp/puma.pid)
-/home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle exec puma --daemon
+RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle exec puma --daemon
 " > hooks/post-receive
 chmod +x hooks/post-receive
 
@@ -86,8 +87,16 @@ cd $WORK_TREE
 " > hooks/post-receive
 chmod +x hooks/post-receive
 
+# Add Server Startup Script
+sudo bash -c 'echo "
+start on filesystem and started networking
+chdir /home/ubuntu/api
+env RAILS_ENV=production
+exec /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle exec puma --daemon
+"' >> /etc/init/openipsum-api.conf
+
 # Add nginx scripts
-sudo echo "
+sudo bash -c 'echo "
 upstream api {
   server unix:/tmp/puma.sock;
 }
@@ -108,9 +117,9 @@ server {
   ssl_prefer_server_ciphers on;
   ssl_ciphers AES256+EECDH:AES256+EDH:!aNULL;
 }
-" > /etc/nginx/sites-enabled/api.conf
+" > /etc/nginx/sites-enabled/api.conf'
 
-sudo echo "
+sudo bash -c 'echo "
 server {
   listen 80;
   server_name openipsum.com;
@@ -121,15 +130,21 @@ server {
   server_name openipsum.com;
   root /home/ubuntu/ui/dist;
   index index.html index.htm;
-
   location / {
     try_files $uri $uri/ /index.html?/$request_uri;
   }
-
   ssl_certificate   /home/ubuntu/certs/openipsum_com.chained.crt;
   ssl_certificate_key   /home/ubuntu/certs/openipsum.com.key;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_prefer_server_ciphers on;
   ssl_ciphers AES256+EECDH:AES256+EDH:!aNULL;
 }
-" > /etc/nginx/sites-enabled/ui.conf
+" > /etc/nginx/sites-enabled/ui.conf'
+
+sudo sed -i 's/# gzip_vary on;/gzip_vary on;/g' /etc/nginx/nginx.conf
+sudo sed -i 's/# gzip_proxied any;/gzip_proxied any;/g' /etc/nginx/nginx.conf
+sudo sed -i 's/# gzip_types /gzip_types /g' /etc/nginx/nginx.conf
+
+# Add server startup script
+
+echo "remember to add SSL certs! And to restart!"
