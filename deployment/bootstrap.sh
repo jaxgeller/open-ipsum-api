@@ -80,6 +80,7 @@ echo "
 #!/bin/bash
 WORK_TREE=/home/ubuntu/ui
 GIT_TREE=/home/ubuntu/git-deploys/ui.git
+export PATH=/home/ubuntu/.nvm/versions/node/v4.2.2/bin:\$PATH
 git --work-tree=\$WORK_TREE --git-dir=\$GIT_TREE checkout -f
 cd \$WORK_TREE
 /home/ubuntu/.nvm/versions/node/v4.2.2/bin/npm install
