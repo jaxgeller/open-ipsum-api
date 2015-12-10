@@ -11,4 +11,4 @@
 /log/*
 !/log/.keep
 /tmp
-deploy.sh
+deployment/deploy_key.pem
