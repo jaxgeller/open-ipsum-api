@@ -73,7 +73,8 @@ cd \$WORK_TREE
 /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle install
 RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:migrate
 RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:seed
-kill -9 \$(cat /tmp/puma.pid)
+sudo kill -9 $(cat /tmp/puma.pid)
+sudo rm /tmp/puma.sock
 RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle exec puma --daemon
 " > hooks/post-receive
 chmod +x hooks/post-receive
