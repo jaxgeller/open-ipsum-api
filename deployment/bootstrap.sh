@@ -12,7 +12,8 @@ sudo apt-get upgrade -y
 sudo apt-get install postgresql postgresql-contrib libpq-dev libgmp3-dev git curl nginx build-essential -y
 
 # Get and set ENV Variables
-echo "DATABASE_PASSWORD="; read DATABASE_PASSWORD
+echo -n "DATABASE_PASSWORD="; read DATABASE_PASSWORD
+echo -n "USER_PASSWORD="; read USER_PASSWORD
 
 # Set up Postgres
 sudo -u postgres createuser -s ubuntu
@@ -23,6 +24,7 @@ echo -e "
 export RAILS_ENV=production
 export OPENIPSUM_DATABASE_USERNAME=ubuntu
 export OPENIPSUM_DATABASE_PASSWORD=$DATABASE_PASSWORD
+export OPENIPSUM_USER_PASS=$USER_PASS
 " >> "$HOME/.bashrc"
 
 # Install Ruby 2.2.3
@@ -70,6 +72,7 @@ git --work-tree=\$WORK_TREE --git-dir=\$GIT_TREE checkout -f
 cd \$WORK_TREE
 /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle install
 RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:migrate
+RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do rake db:seed
 kill -9 \$(cat /tmp/puma.pid)
 RAILS_ENV=production /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle exec puma --daemon
 " > hooks/post-receive

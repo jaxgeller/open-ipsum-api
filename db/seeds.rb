@@ -1,7 +1,7 @@
 password = ENV['OPENIPSUM_USER_PASS'] || 'password'
 
-User.create(username: 'jackson', email: 'jackson@gmail.com', password: password, password_confirmation: password)
-User.create(username: 'jeff', email: 'geller@gmail.com', password: password, password_confirmation: password)
+User.create(username: 'jackson', email: 'jacksongeller@gmail.com', password: password, password_confirmation: password)
+User.create(username: 'jeff', email: 'jahilnbrand@gmail.com', password: password, password_confirmation: password)
 
 startup_ipsum = File.open("db/ipsum_data/startup_ipsum.txt", "r").read
 Ipsum.create(title: 'Startup Ipsum', text: startup_ipsum, user: User.first, g_markov: false)
