@@ -16,7 +16,7 @@ after_success:
 - chmod 600 deployment/deploy_key.pem
 - ssh-add deployment/deploy_key.pem
 - git remote add deploy "ssh://ubuntu@api.openipsum.com/home/ubuntu/git-deploys/api.git"
-- git push -u deploy master
+- git push -u deploy master --force
 before_install:
 - openssl aes-256-cbc -K $encrypted_9ad051952287_key -iv $encrypted_9ad051952287_iv
   -in deployment/deploy_key.pem.enc -out deployment/deploy_key.pem -d
