@@ -52,3 +52,13 @@ You will need the following things properly installed on your computer.
 ### Running / Development
 
 * `rails server`
+
+### Bootstrap an Ubuntu Server
+
+Run the init scripts
+
+```
+curl -o run.sh https://raw.githubusercontent.com/jaxgeller/open-ipsum-api/master/deployment/bootstrap.sh && \
+chmod +x run.sh && \
+./run.sh
+```
