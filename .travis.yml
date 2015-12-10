@@ -1,22 +1,33 @@
 cache: bundler
-
 language: ruby
 
 rvm:
-  - 2.2.3
+- 2.2.3
 
 addons:
   postgresql: '9.4'
 
+before_install:
+- openssl aes-256-cbc -K $encrypted_9ad051952287_key -iv $encrypted_9ad051952287_iv
+- in deploy-key.enc -out deployment/deploy-key -d
+
 before_script:
-  - psql -c "create database openipsumapitest;" -U postgres
+- psql -c "create database openipsumapitest;" -U postgres
 
 notifications:
   email: false
 
 script:
-  - bundle exec rake rubocop
-  - bundle exec rake spec
+- bundle exec rake rubocop
+- bundle exec rake spec
 
 after_success:
-  - eval "$(ssh-agent -s)"
+- eval "$(ssh-agent -s)"
+- chmod 600 deployment/deploy-key
+- ssh-add deployment/deploy-key
+- git remote add deploy $DEPLOY_URL
+- git push deploy
+
+env:
+  global:
+    secure: Htol4tXsSD8JjpWAE6axcMH15/pQBWVeh20Iem/E2YJHLwLT7BkSqoqtyeBiD/4OkiZYkmzvCtD0XqMXuddHYtUQEv5wpohgcDFyAZTX7CshnYgYcY5d+A8PN9WxBF/5Br4SCowxcXHsxR093lG+CiR4U5C6aAVEMxTxLb/f3frz+nYBIWpZl2iw9ZtZRG7nFtgApPz+KhBt6RqjipgwHnenJoH3zuMduTHj9W+XomQGuHvsQzgRvKC4+rL/L+XuwPlDxK7XgzaJ9joekbb+YAsqjF9+QGrhzFeBlq0Ea/d6qXNT+xtyQu+tCXGa9DkgnvV7q0iAzoF+/TtN9PHtBrO3uh58wy5Lm+BVGnvEbFkNMhEHNrqwLW9YeFA/ytPSoD101jywfvQ2iQqcmMpLkOItBrHkDaCddcVfXGxyCp02AiGmtHFbn6Wt48QxId6JBKTmX4aZ79T/OGoM7BtFOuPRlorH7nmKtDylo4RaDOL6v1ooAb9Td349Oz8Q7S7SpL0V9SUPvGfX4aiyO6W3uQufQZQKeSk/BMspDmNbHej1dGBdLAXa0KSPaRUgFYYWI+c018Nd2v3HKBG0kyBJOkHzc/eANWS+n9AvjbhJ4Dv1Ni7bIUZWm9Zg5egiNpqorlkgptrnz+cgGNn4FjchxoaEy8BeAlTmXGMYqL+irxI=

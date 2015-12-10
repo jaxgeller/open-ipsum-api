@@ -93,7 +93,7 @@ start on filesystem and started networking
 chdir /home/ubuntu/api
 env RAILS_ENV=production
 exec /home/ubuntu/.rvm/bin/rvm 2.2.3 do bundle exec puma --daemon
-"' >> /etc/init/openipsum-api.conf
+" > /etc/init/openipsum-api.conf'
 
 # Add nginx scripts
 sudo bash -c 'echo "
