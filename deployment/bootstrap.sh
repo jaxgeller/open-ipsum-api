@@ -129,7 +129,22 @@ sudo bash -c 'echo "
 server {
   listen 80;
   server_name openipsum.com;
-  rewrite ^/(.*) https://openipsum.com/\$1 permanent;
+  rewrite ^/(.*) https://openipsum.com/$1 permanent;
+}
+server {
+  listen 80;
+  server_name www.openipsum.com;
+  return 301 https://openipsum.com$request_uri;
+}
+server {
+  listen 443 ssl;
+  server_name www.openipsum.com;
+  return 301 https://openipsum.com$request_uri;
+  ssl_certificate         /home/ubuntu/certs/openipsum_com.chained.crt;
+  ssl_certificate_key     /home/ubuntu/certs/openipsum.com.key;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers AES256+EECDH:AES256+EDH:!aNULL;
 }
 server {
   listen 443 ssl;
@@ -137,10 +152,10 @@ server {
   root /home/ubuntu/ui/dist;
   index index.html index.htm;
   location / {
-    try_files \$uri \$uri/ /index.html?/\$request_uri;
+    try_files $uri $uri/ /index.html?/$request_uri;
   }
-  ssl_certificate       /home/ubuntu/certs/openipsum_com.chained.crt;
-  ssl_certificate_key   /home/ubuntu/certs/openipsum.com.key;
+  ssl_certificate         /home/ubuntu/certs/openipsum_com.chained.crt;
+  ssl_certificate_key     /home/ubuntu/certs/openipsum.com.key;
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
   ssl_prefer_server_ciphers on;
   ssl_ciphers AES256+EECDH:AES256+EDH:!aNULL;
