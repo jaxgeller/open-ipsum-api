@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
 
+  post '/passwords', to: 'password_resets#create'
+  post '/passwords/:id/update', to: 'password_resets#update'
+
   get '/*404', to: 'application#route_not_found'
 end
