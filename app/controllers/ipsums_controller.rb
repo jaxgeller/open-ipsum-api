@@ -8,7 +8,8 @@ class IpsumsController < ApplicationController
   end
 
   def index
-    ipsums = paginate Ipsum.all
+    ipsums = paginate Ipsum.where.not(title: ['About Open Ipsum Ipsum', '404 Ipsum'])
+
     render json: ipsums
   end
 

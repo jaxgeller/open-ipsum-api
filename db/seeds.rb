@@ -9,6 +9,12 @@ Ipsum.create(title: 'Startup Ipsum', text: startup_ipsum, user: User.first, g_ma
 hipster_ipsum = File.open("db/ipsum_data/hipster_ipsum.txt", "r").read
 Ipsum.create(title: 'Hipster Ipsum', text: hipster_ipsum, user: User.all.sample, g_markov: false)
 
+not_found_ipsum = File.open("db/ipsum_data/not_found_ipsum.txt", "r").read
+Ipsum.create(title: '404 Ipsum', text: not_found_ipsum, user: User.all.sample, g_markov: false)
+
+about_open_ipsum_ipsum = File.open("db/ipsum_data/about_open_ipsum_ipsum.txt", "r").read
+Ipsum.create(title: 'About Open Ipsum Ipsum', text: about_open_ipsum_ipsum, user: User.all.sample, g_markov: false)
+
 bluth_ipsum = File.open("db/ipsum_data/bluth_ipsum.txt", "r").read
 Ipsum.create(title: 'Bluth Ipsum', text: bluth_ipsum, user: User.last)
 

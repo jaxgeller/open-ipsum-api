@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
-
 gem 'active_model_serializers', '0.10.0.rc3'
 gem 'api-pagination'
 gem 'bcrypt', '~> 3.1.7'
