@@ -18,4 +18,8 @@ open ipsum,
 text generation,
 about,
 @jaxgeller,
-@jhilmd
+@jhilmd,
+we used libmarkov,
+markov chains,
+simplelorem,
+lorem ipsum text
