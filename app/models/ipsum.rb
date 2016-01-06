@@ -22,13 +22,12 @@ class Ipsum < ActiveRecord::Base
   end
 
   def sanitize
-    if !self.g_markov
+    if !g_markov
       self.text = text.gsub(/\t/, ' ')
       self.text = text.gsub(/\n/, ',')
     else
       self.text = text.gsub(/\n|\t/, ' ')
     end
-
   end
 
   def generate_sample
@@ -39,7 +38,7 @@ class Ipsum < ActiveRecord::Base
   validates :title, :slug, uniqueness: true
   validates :title, :text, :user, presence: true
 
-  validates :text, length: { minimum: 125, maximum: 37500 }, allow_blank: false
+  validates :text, length: { minimum: 125, maximum: 37_500 }, allow_blank: false
   validates :text, length: {
     minimum: 10,
     tokenizer: ->(str) { str.split(/\.|\?|\!/) },
