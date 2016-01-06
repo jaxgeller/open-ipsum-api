@@ -39,7 +39,7 @@ class Ipsum < ActiveRecord::Base
   validates :title, :slug, uniqueness: true
   validates :title, :text, :user, presence: true
 
-  validates :text, length: { minimum: 125, maximum: 7500 }, allow_blank: false
+  validates :text, length: { minimum: 125, maximum: 37500 }, allow_blank: false
   validates :text, length: {
     minimum: 10,
     tokenizer: ->(str) { str.split(/\.|\?|\!/) },
