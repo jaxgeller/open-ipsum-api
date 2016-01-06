@@ -22,7 +22,13 @@ class Ipsum < ActiveRecord::Base
   end
 
   def sanitize
-    self.text = text.gsub(/\n|\t/, '')
+    if !self.g_markov
+      self.text = text.gsub(/\t/, ' ')
+      self.text = text.gsub(/\n/, ',')
+    else
+      self.text = text.gsub(/\n|\t/, ' ')
+    end
+
   end
 
   def generate_sample
