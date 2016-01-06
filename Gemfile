@@ -14,7 +14,7 @@ gem 'rack-cors'
 gem 'rails', '4.2.5'
 gem 'rails-api'
 gem 'rubocop'
-gem 'simplelorem', '1.0.8'
+gem 'simplelorem', '1.1.0'
 gem 'will_paginate'
 
 group :development, :test do
