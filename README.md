@@ -4,6 +4,8 @@
 
 This is the API backing to [openipsum.com](https://openipsum.com). It is built using Rails-api.
 
+Checkout the UI for this api [here](https://github.com/jaxgeller/open-ipsum-ui)
+
 ## Using the API
 
 The host for the API is `https://api.openipsum.com`, __all requests must be made over https.__
